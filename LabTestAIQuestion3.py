@@ -8,15 +8,15 @@ import pandas as pd
 st.set_page_config(page_title="Webcam Image Classification", layout="centered")
 st.title("Real-Time Webcam Image Classification (ResNet-18)")
 
-# Step 1 & 2: Load ImageNet labels
+# Step 2: Download the ImageNet class labels from the provided GitHub text file link
 LABELS_URL = "https://raw.githubusercontent.com/pytorch/hub/master/imagenet_classes.txt"
 labels = requests.get(LABELS_URL).text.splitlines()
 
-# Step 3: Load pretrained ResNet-18
+# Step 3: Load pretrained ResNet-18 model
 model = models.resnet18(pretrained=True)
 model.eval()
 
-# Step 4: Define preprocessing pipeline
+# Step 4: Define the image preprocessing pipeline
 preprocess = transforms.Compose([
     transforms.Resize(256),
     transforms.CenterCrop(224),
@@ -27,7 +27,7 @@ preprocess = transforms.Compose([
     )
 ])
 
-# Step 5: Capture image from webcam
+# Step 5: Capture image
 camera_image = st.camera_input("Capture an image using your webcam")
 
 if camera_image is not None:
@@ -57,3 +57,4 @@ if camera_image is not None:
 
     st.subheader("🔍 Top 5 Prediction Results")
     st.table(df)
+
