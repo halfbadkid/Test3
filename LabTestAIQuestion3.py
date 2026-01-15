@@ -55,6 +55,7 @@ if camera_image is not None:
 
     df = pd.DataFrame(results)
 
-    st.subheader("🔍 Top 5 Prediction Results")
+    st.subheader("Top 5 Prediction Results")
     st.table(df)
+
 
